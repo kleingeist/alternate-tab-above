@@ -1,0 +1,10 @@
+{
+"extension-id": "alternate-tab-above",
+"uuid": "alternate-tab-above@gnome-shell-extensions.ae35.de",
+"settings-schema": "org.gnome.shell.extensions.alternate-tab-above",
+"gettext-domain": "gnome-shell-extensions",
+"name": "AlternateTabAbove",
+"description": "GNOME Shell Extension that uses a windows based switcher for Alt-Tab but does group by application for Alt-[key above Tab]",
+"shell-version": [ "3.16" ],
+"url": "https://github.com/kleingeist/alternate-tab-above"
+}

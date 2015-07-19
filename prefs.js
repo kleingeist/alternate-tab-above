@@ -31,7 +31,7 @@ const AltTabSettingsWidget = new GObject.Class({
         this.parent(params);
         this.margin = 24;
         this.row_spacing = 6;
-	this.orientation = Gtk.Orientation.VERTICAL;
+        this.orientation = Gtk.Orientation.VERTICAL;
 
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.shell.window-switcher' });
 

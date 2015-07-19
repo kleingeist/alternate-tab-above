@@ -17,7 +17,7 @@ function setKeybinding(name, func) {
     Main.wm.setCustomKeybindingHandler(name, Shell.ActionMode.NORMAL, func);
 }
 
-function enable() {
+function enable() {  
     injections['_keyPressHandler'] = AltTab.WindowSwitcherPopup.prototype._keyPressHandler;
     AltTab.WindowSwitcherPopup.prototype._keyPressHandler = function(keysym, action) {
         switch(action) {
@@ -34,18 +34,14 @@ function enable() {
     };
 
     setKeybinding('switch-applications', Lang.bind(Main.wm, Main.wm._startWindowSwitcher));
-    setKeybinding('switch-group', Lang.bind(Main.wm, Main.wm._startWindowSwitcher));
     setKeybinding('switch-applications-backward', Lang.bind(Main.wm, Main.wm._startWindowSwitcher));
-    setKeybinding('switch-group-backward', Lang.bind(Main.wm, Main.wm._startWindowSwitcher));
 }
 
 function disable() {
     var prop;
 
     setKeybinding('switch-applications', Lang.bind(Main.wm, Main.wm._startAppSwitcher));
-    setKeybinding('switch-group', Lang.bind(Main.wm, Main.wm._startAppSwitcher));
     setKeybinding('switch-applications-backward', Lang.bind(Main.wm, Main.wm._startAppSwitcher));
-    setKeybinding('switch-group-backward', Lang.bind(Main.wm, Main.wm._startAppSwitcher));
 
     for (prop in injections)
         AltTab.WindowSwitcherPopup.prototype[prop] = injections[prop];
