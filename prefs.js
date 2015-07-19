@@ -34,6 +34,7 @@ const AltTabSettingsWidget = new GObject.Class({
         this.orientation = Gtk.Orientation.VERTICAL;
 
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.shell.window-switcher' });
+        this._settingsApp = new Gio.Settings({ schema_id: 'org.gnome.shell.app-switcher' });
 
         let presentLabel = '<b>' + _("Present windows as") + '</b>';
         this.add(new Gtk.Label({ label: presentLabel, use_markup: true,
@@ -66,10 +67,17 @@ const AltTabSettingsWidget = new GObject.Class({
                 radio.active = true;
         }
 
-	let check = new Gtk.CheckButton({ label: _("Show only windows in the current workspace"),
-	                                  margin_top: 6 });
-	this._settings.bind(SETTINGS_CURRENT_WORKSPACE_ONLY, check, 'active', Gio.SettingsBindFlags.DEFAULT);
-	this.add(check);
+      	let check = new Gtk.CheckButton({ label: _("Show only windows in the current workspace"),
+      	                                  margin_top: 6 });
+      	check.connect('toggled', Lang.bind(this, function(widget) {
+          this._settings.set_boolean(SETTINGS_CURRENT_WORKSPACE_ONLY, widget.active);
+          this._settingsApp.set_boolean(SETTINGS_CURRENT_WORKSPACE_ONLY, widget.active);
+        }));
+
+        if (this._settings.get_boolean(SETTINGS_CURRENT_WORKSPACE_ONLY))
+          check.active = true;
+
+      	this.add(check);
     },
 });
 
